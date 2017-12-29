@@ -26,10 +26,10 @@ public class configReader {
         }
     }
 
-    public void initConfig(String ConfigFilePath) throws ClassNotFoundException,
+    public void initConfig(String configFilePath) throws ClassNotFoundException,
             NoSuchFieldException, IllegalAccessException, DocumentException {
         SAXReader saxReader = new SAXReader();
-        Document doc = saxReader.read(new File(ConfigFilePath));
+        Document doc = saxReader.read(new File(configFilePath));
         Element root = doc.getRootElement();
         configReader configReader = new configReader();
         for (Element classElement : (List<Element>) root.elements()) {
