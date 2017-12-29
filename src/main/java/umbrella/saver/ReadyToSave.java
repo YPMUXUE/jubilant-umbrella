@@ -24,8 +24,8 @@ public class ReadyToSave {
         this.output = new OutputByStream();
     }
 
-    public void save(InputStream inputStream, String filePath, String suffix) throws IOException {
-        output.writeToFile(inputStream, generateFile.generateNewFileWithRandomName(filePath, suffix));
+    public void save(InputStream inputStream, String suffix) throws IOException {
+        output.writeToFile(inputStream, generateFile.generateNewFileWithRandomName(SaverConfig.OUTPUT_PATH, suffix));
     }
 
     public static void main(String[] args) throws Exception {
@@ -37,7 +37,6 @@ public class ReadyToSave {
             ReadyToSave readyToSave = new ReadyToSave();
             readyToSave.setOutput(new OutputByChannel());
             readyToSave.save(urlConnection.getInputStream(),
-                    SaverConfig.OUTPUT_PATH,
                     url.substring(url.lastIndexOf(".")));
 
         System.out.println("start" + (System.currentTimeMillis() - start));

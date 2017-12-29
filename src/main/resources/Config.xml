@@ -4,4 +4,15 @@
         <READ_WRITE_BUFFERED_SIZE>10240</READ_WRITE_BUFFERED_SIZE>
         <OUTPUT_PATH>C:\Users\yp\Desktop\新建文件夹</OUTPUT_PATH>
     </umbrella.saver.config.SaverConfig>
+
+    <umbrella.connection.proxy.config.ProxyConfig>
+        <PROXY_PORT>1080</PROXY_PORT>
+        <PROXY_IP_ADDRESS>127.0.0.1</PROXY_IP_ADDRESS>
+        <!--HTTP,DIRECT,SOCKS-->
+        <PROXY_TYPE>HTTP</PROXY_TYPE>
+    </umbrella.connection.proxy.config.ProxyConfig>
+
+    <umbrella.task.config.TaskConfig>
+        <THREAD_COUNT>5</THREAD_COUNT>
+    </umbrella.task.config.TaskConfig>
 </Config>
