@@ -1,0 +1,71 @@
+package saver.impl;
+
+import saver.GenerateFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.UUID;
+
+public class GenerateFileImpl implements GenerateFile {
+    public static String POINT = ".";
+
+    @Override
+    public boolean generatePath(String path) {
+        File file = new File(path);
+        boolean createIsSuccess;
+        if (file.isDirectory()) {
+            if (!file.exists()) {
+                createIsSuccess = file.mkdirs();
+            } else {
+                return true;
+            }
+        } else {
+            if (!file.getParentFile().exists()) {
+                createIsSuccess = file.getParentFile().mkdirs();
+            } else {
+                return true;
+            }
+        }
+        return createIsSuccess;
+    }
+
+    @Override
+    public File generateNewFile(String filePath, String fileName, String suffix) throws IOException {
+        if (!suffix.startsWith(POINT)) {
+            suffix = POINT + suffix;
+        }
+        if (!filePath.endsWith("\\")){
+            filePath=filePath+"\\";
+        }
+        String fileStr = filePath + fileName + suffix;
+        generatePath(fileStr);
+        File file = new File(fileStr);
+        if (file.exists()) {
+            return file;
+        } else {
+            file.createNewFile();
+            return file;
+        }
+
+    }
+
+    @Override
+    public File generateNewFileWithRandomName(String filePath, String suffix) throws IOException {
+        if (!suffix.startsWith(POINT)) {
+            suffix = POINT + suffix;
+        }
+        if (!filePath.endsWith("\\")){
+            filePath=filePath+"\\";
+        }
+        UUID uuid = UUID.randomUUID();
+        String fileStr = filePath + uuid.toString() + suffix;
+        generatePath(fileStr);
+        File file = new File(fileStr);
+        if (file.exists()) {
+            return file;
+        } else {
+            file.createNewFile();
+            return file;
+        }
+    }
+}

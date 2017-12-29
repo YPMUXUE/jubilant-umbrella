@@ -13,7 +13,7 @@ public class NIOStream {
 
     public static void main(String[] args) throws Exception {
         InputStream netIs = null;
-        Long startTime = System.currentTimeMillis();
+        Long startTime=0L ;
         try {
             URLConnection urlConnection = (new URL(url)).openConnection();
             urlConnection.setConnectTimeout(timeout);
@@ -22,26 +22,30 @@ public class NIOStream {
 //            while (bufferedReader.ready()) {
 //                System.out.println(bufferedReader.readLine());
 //            }
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(netIs);
-            DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
-            File file = new File(filePath);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            FileChannel fo=new RandomAccessFile(file,"rw").getChannel();
-            ByteBuffer byteBuffer=ByteBuffer.allocate(1024);
-            byte[] bytes=new byte[1024];
-            int len;
-            while((len=dataInputStream.read(bytes))!=-1) {
-                byteBuffer.clear();
-                byteBuffer.put(bytes,0,len);
-                byteBuffer.flip();
-                fo.write(byteBuffer);
-            }
-            fo.close();
+            startTime= System.currentTimeMillis();
+           // for(int i=0;i<10;i++) {
+
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(netIs);
+                DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
+                File file = new File(filePath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                FileChannel fo = new RandomAccessFile(file, "rw").getChannel();
+                ByteBuffer byteBuffer = ByteBuffer.allocate(1024);
+                byte[] bytes = new byte[1024];
+                int len;
+                while ((len = dataInputStream.read(bytes)) != -1) {
+                    byteBuffer.clear();
+                    byteBuffer.put(bytes, 0, len);
+                    byteBuffer.flip();
+                    fo.write(byteBuffer);
+                }
+                fo.close();
+          //  }
         } finally {
             if (netIs != null) {
                 netIs.close();

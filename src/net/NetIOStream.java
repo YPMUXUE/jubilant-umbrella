@@ -12,7 +12,7 @@ public class NetIOStream {
     public static void main(String[] args) throws Exception {
         InputStream netIs = null;
         DataOutputStream dataOutputStream = null;
-        Long startTime = System.currentTimeMillis();
+        Long startTime = 0L;
         try {
             URLConnection urlConnection = (new URL(url)).openConnection();
             urlConnection.setConnectTimeout(timeout);
@@ -21,22 +21,25 @@ public class NetIOStream {
 //            while (bufferedReader.ready()) {
 //                System.out.println(bufferedReader.readLine());
 //            }
-            BufferedInputStream bufferedInputStream = new BufferedInputStream(netIs);
-            DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
-            File file = new File(filePath);
-            if (!file.getParentFile().exists()) {
-                file.getParentFile().mkdirs();
-            }
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
-            byte[] bytes = new byte[1024];
-            int len;
-            while ((len = dataInputStream.read(bytes)) != -1) {
-                dataOutputStream.write(bytes, 0, len);
-            }
-            dataOutputStream.flush();
+            startTime = System.currentTimeMillis();
+           // for(int i=0;i<10;i++) {
+                BufferedInputStream bufferedInputStream = new BufferedInputStream(netIs);
+                DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
+                File file = new File(filePath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
+                if (!file.exists()) {
+                    file.createNewFile();
+                }
+                dataOutputStream = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(file)));
+                byte[] bytes = new byte[1024];
+                int len;
+                while ((len = dataInputStream.read(bytes)) != -1) {
+                    dataOutputStream.write(bytes, 0, len);
+                }
+                dataOutputStream.flush();
+            //}
         } finally {
             if (netIs != null) {
                 netIs.close();
