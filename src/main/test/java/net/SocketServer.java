@@ -1,4 +1,4 @@
-package umbrella.net;
+package net;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
