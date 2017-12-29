@@ -1,9 +1,8 @@
-package saver;
+package umbrella.saver;
 
-import config.StaticConfig;
-import saver.impl.GenerateFileImpl;
-import saver.impl.OutputByStream;
-import sun.swing.FilePane;
+import umbrella.config.StaticConfig;
+import umbrella.saver.impl.GenerateFileImpl;
+import umbrella.saver.impl.OutputByStream;
 
 import java.io.IOException;
 import java.io.InputStream;

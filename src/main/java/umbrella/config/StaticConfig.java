@@ -1,4 +1,4 @@
-package config;
+package umbrella.config;
 
 public class StaticConfig {
     public static int READ_WRITE_BUFFERED_SIZE=1024;

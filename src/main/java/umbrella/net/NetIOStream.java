@@ -1,4 +1,4 @@
-package net;
+package umbrella.net;
 
 import java.io.*;
 import java.net.URL;

@@ -1,7 +1,6 @@
-package net;
+package umbrella.net;
 
 import java.io.*;
-import java.net.InetAddress;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
