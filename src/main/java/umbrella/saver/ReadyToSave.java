@@ -2,7 +2,7 @@ package umbrella.saver;
 
 import umbrella.saver.config.SaverConfig;
 import umbrella.saver.impl.GenerateFileImpl;
-import umbrella.saver.impl.OutputByStream;
+import umbrella.saver.impl.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -30,15 +30,16 @@ public class ReadyToSave {
 
     public static void main(String[] args) throws Exception {
         Long start = System.currentTimeMillis();
-        String url = "https://pic4.zhimg.com/v2-16bf98dd9d8c6a5a89b574156e5f271e_xl.jpg";
+        String url = "http://image.tianjimedia.com/uploadImages/2013/030/DKTWSM335I06.jpg";
         URLConnection urlConnection = (new URL(url)).openConnection();
         urlConnection.connect();
         Long mid = System.currentTimeMillis();
-        ReadyToSave readyToSave = new ReadyToSave();
-        //readyToSave.setOutput(new OutputByChannel());
-        readyToSave.save(urlConnection.getInputStream(),
-                SaverConfig.OUTPUT_PATH,
-                url.substring(url.lastIndexOf(".")));
+            ReadyToSave readyToSave = new ReadyToSave();
+            readyToSave.setOutput(new OutputByChannel());
+            readyToSave.save(urlConnection.getInputStream(),
+                    SaverConfig.OUTPUT_PATH,
+                    url.substring(url.lastIndexOf(".")));
+
         System.out.println("start" + (System.currentTimeMillis() - start));
         System.out.println("mid" + (System.currentTimeMillis() - mid));
     }

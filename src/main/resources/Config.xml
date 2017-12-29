@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Config>
+    <umbrella.saver.config.SaverConfig>
+        <READ_WRITE_BUFFERED_SIZE>10240</READ_WRITE_BUFFERED_SIZE>
+        <OUTPUT_PATH>C:\Users\yp\Desktop\新建文件夹</OUTPUT_PATH>
+    </umbrella.saver.config.SaverConfig>
+</Config>

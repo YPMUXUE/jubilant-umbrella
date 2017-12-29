@@ -14,7 +14,7 @@ public class OutputByChannel implements Output {
     public void writeToFile(InputStream inputStream, File file) throws IOException {
 
         try (
-                ReadableByteChannel read = Channels.newChannel(inputStream);
+                ReadableByteChannel read = Channels.newChannel(new BufferedInputStream(inputStream));
                 FileChannel write = new RandomAccessFile(file, "rw").getChannel()
         ) {
             ByteBuffer buffer = ByteBuffer.allocate(SaverConfig.READ_WRITE_BUFFERED_SIZE);
