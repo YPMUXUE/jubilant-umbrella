@@ -27,11 +27,7 @@ public class Connections {
     }
 
     public static InputStream getInputStream(String url, boolean isProxy) throws IOException {
-        if (isProxy) {
-            return getInputStream(new URL(url).openConnection(ProxyFactory.getProxy()));
-        } else {
-            return getInputStream(new URL(url).openConnection());
-        }
+        return getInputStream(new URL(url),isProxy);
     }
 
     private static InputStream getInputStream(URLConnection urlConnection) throws IOException {

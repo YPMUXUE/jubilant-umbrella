@@ -11,13 +11,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-public class configReader {
+public class ConfigReader {
     public static void main(String[] args) throws Exception {
         String filepath = "D:\\CodeProject\\jubilant-umbrella\\src\\main\\resources\\Config.xml";
         SAXReader saxReader = new SAXReader();
         Document doc = saxReader.read(new File(filepath));
         Element root = doc.getRootElement();
-        configReader configReader = new configReader();
+        ConfigReader configReader = new ConfigReader();
         for (Element classElement : (List<Element>) root.elements()) {
             Class c = Class.forName(classElement.getQualifiedName());
             for (Element fieldElement : (List<Element>) classElement.elements()) {
@@ -31,7 +31,7 @@ public class configReader {
         SAXReader saxReader = new SAXReader();
         Document doc = saxReader.read(new File(configFilePath));
         Element root = doc.getRootElement();
-        configReader configReader = new configReader();
+        ConfigReader configReader = new ConfigReader();
         for (Element classElement : (List<Element>) root.elements()) {
             Class c = Class.forName(classElement.getQualifiedName());
             for (Element fieldElement : (List<Element>) classElement.elements()) {

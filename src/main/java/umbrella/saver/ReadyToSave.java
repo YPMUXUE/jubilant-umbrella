@@ -30,8 +30,9 @@ public class ReadyToSave {
 
     public static void main(String[] args) throws Exception {
         Long start = System.currentTimeMillis();
-        String url = "http://image.tianjimedia.com/uploadImages/2013/030/DKTWSM335I06.jpg";
+        String url = "https://i.pximg.net/img-master/img/2017/12/27/00/00/10/66474802_p0_master1200.jpg";
         URLConnection urlConnection = (new URL(url)).openConnection();
+        urlConnection.setRequestProperty("referer","https://www.pixiv.net/member_illust.php?mode=manga&illust_id=66474802");
         urlConnection.connect();
         Long mid = System.currentTimeMillis();
             ReadyToSave readyToSave = new ReadyToSave();

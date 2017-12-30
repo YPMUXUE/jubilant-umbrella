@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class GenerateFileImpl implements GenerateFile {
-    public static String POINT = ".";
+    public static final String POINT = ".";
 
     @Override
     public boolean generatePath(String path) {
