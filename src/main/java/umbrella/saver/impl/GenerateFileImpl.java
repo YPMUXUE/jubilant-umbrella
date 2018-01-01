@@ -7,7 +7,7 @@ import java.io.IOException;
 import java.util.UUID;
 
 public class GenerateFileImpl implements GenerateFile {
-    public static final String POINT = ".";
+    private static final String POINT = ".";
 
     @Override
     public boolean generatePath(String path) {
@@ -41,6 +41,11 @@ public class GenerateFileImpl implements GenerateFile {
         generatePath(fileStr);
         File file = new File(fileStr);
         if (file.exists()) {
+            do{
+                fileName=fileName+System.currentTimeMillis();
+                file=new File(filePath + fileName + suffix);
+            }while (file.exists());
+            file.createNewFile();
             return file;
         } else {
             file.createNewFile();

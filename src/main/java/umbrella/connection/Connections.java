@@ -37,6 +37,6 @@ public class Connections {
     public static void main(String[] args) throws Exception{
         String url="http://d.hiphotos.baidu.com/zhidao/pic/item/72f082025aafa40fe871b36bad64034f79f019d4.jpg";
         ReadyToSave readyToSave=new ReadyToSave();
-        readyToSave.save(Connections.getInputStream(url,true),url.substring(url.lastIndexOf(".")));
+       // readyToSave.save(Connections.getInputStream(url,true),url.substring(url.lastIndexOf(".")));
     }
 }

@@ -24,8 +24,11 @@ public class ReadyToSave {
         this.output = new OutputByStream();
     }
 
-    public void save(InputStream inputStream, String suffix) throws IOException {
+    public void saveWithRandomName(InputStream inputStream, String suffix) throws IOException {
         output.writeToFile(inputStream, generateFile.generateNewFileWithRandomName(SaverConfig.OUTPUT_PATH, suffix));
+    }
+    public void save(InputStream inputStream,String fileName,String suffix) throws IOException {
+        output.writeToFile(inputStream, generateFile.generateNewFile(SaverConfig.OUTPUT_PATH, fileName,suffix));
     }
 
     public static void main(String[] args) throws Exception {
@@ -37,7 +40,7 @@ public class ReadyToSave {
         Long mid = System.currentTimeMillis();
             ReadyToSave readyToSave = new ReadyToSave();
             readyToSave.setOutput(new OutputByChannel());
-            readyToSave.save(urlConnection.getInputStream(),
+            readyToSave.save(urlConnection.getInputStream(),"test",
                     url.substring(url.lastIndexOf(".")));
 
         System.out.println("start" + (System.currentTimeMillis() - start));
