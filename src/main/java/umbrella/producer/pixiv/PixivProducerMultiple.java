@@ -4,7 +4,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
-import org.omg.PortableInterceptor.SYSTEM_EXCEPTION;
 import umbrella.bootstrap.InputParameter;
 import umbrella.connection.proxy.ProxyFactory;
 import umbrella.task.ReceiverDTO;
@@ -47,7 +46,6 @@ public class PixivProducerMultiple implements Runnable {
                         for (Element thirdElement:thirdElements){
                             String imgSrc=thirdElement.attr("src");
                             receiverDTO=new ReceiverDTO();
-                            System.out.println(imgSrc);
                             receiverDTO.setFileName(imgSrc.substring(imgSrc.lastIndexOf("/img/")+5,imgSrc.length()).replace("/",""));
                             receiverDTO.setUrl(imgSrc);
                             Map<String,String> map=new HashMap<>(3);
