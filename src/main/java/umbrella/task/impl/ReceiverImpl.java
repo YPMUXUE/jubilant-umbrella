@@ -18,6 +18,7 @@ public class ReceiverImpl implements Receiver {
     @Override
     public void submit(ReceiverDTO receiverDTO) {
         System.out.println(receiverDTO.getFileName());
+        System.out.println(receiverDTO.getUrl());
         Map<String,String> map=receiverDTO.getRequestPropertyAdd();
         for (Map.Entry entry:map.entrySet()){
             System.out.println(entry.getKey()+":"+entry.getValue());
