@@ -8,7 +8,7 @@ public class InputParameter {
 
     public InputParameter(){}
 
-    public void setUserid(String userid) {
+     void setUserid(String userid) {
         this.userid = userid;
     }
 
@@ -16,11 +16,11 @@ public class InputParameter {
         this.sessionKey = sessionKey;
     }
 
-    public void setSessionValue(String sessionValue) {
+     void setSessionValue(String sessionValue) {
         this.sessionValue = sessionValue;
     }
 
-    public void setProxy(String proxy) {
+     void setProxy(String proxy) {
         this.proxy = Boolean.valueOf(proxy);
     }
 

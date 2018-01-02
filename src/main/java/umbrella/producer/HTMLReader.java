@@ -6,12 +6,10 @@ import umbrella.connection.proxy.ProxyFactory;
 
 public class HTMLReader {
     public static void main(String[] args) throws Exception{
-        String userid="122233";
-        String beforeURL="https://www.pixiv.net/member_illust.php?id=%s";
-        String sessionId="28310717_77076bdfc207988a8c93dc28a1aecfdd";
-        String afterUrl=String.format(beforeURL,userid);
-        Document document= Jsoup.connect(afterUrl).proxy(ProxyFactory.getProxy()).cookie("PHPSESSID",sessionId).get();
-        System.out.println(document.select("li[class=image-item]>a[class=work  _work]"));
+        String URL="https://www.pixiv.net/member_illust.php?mode=medium&illust_id=%s";
+        String sessionId="28310717_7c5889d8e720665360d1bbc37486e142";
+        Document document= Jsoup.connect(URL).proxy(ProxyFactory.getProxy()).cookie("PHPSESSID",sessionId).get();
+        System.out.println(document.select("div[class=works_display]>a[class=_work multiple]"));
 
 
     }

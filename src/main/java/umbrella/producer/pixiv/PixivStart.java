@@ -12,6 +12,7 @@ import umbrella.task.ReceiverDTO;
 import umbrella.task.config.TaskConfig;
 
 import java.io.IOException;
+import java.net.URI;
 import java.util.concurrent.*;
 
 public class PixivStart implements Start {
@@ -40,12 +41,12 @@ public class PixivStart implements Start {
         productExecutor = Executors.newFixedThreadPool(TaskConfig.THREAD_COUNT);
         Elements elements = document.select(selector);
         for (Element element : elements) {
-            productExecutor.execute(new PixivProducerDirect(addHostName(element.attr("href")),parameter,
+            productExecutor.execute(new PixivProducerDirect(addHostName(element.attr("href")), parameter,
                     productQueue));
         }
         elements = document.select(selectorMultiple);
         for (Element element : elements) {
-            productExecutor.execute(new PixivProducerMultiple(addHostName(element.attr("href")),parameter,
+            productExecutor.execute(new PixivProducerMultiple(addHostName(element.attr("href")), parameter,
                     productQueue));
         }
         productExecutor.shutdown();
@@ -58,8 +59,8 @@ public class PixivStart implements Start {
     public void save(Receiver receiver) throws InterruptedException {
         ReceiverDTO receiverDTO = null;
         //productExecutor.isTerminated内所有线程返回时才会为true
-        while (productQueue.size()>0 || (!productExecutor.isTerminated())){
-            while (((receiverDTO=productQueue.poll(3, TimeUnit.SECONDS))!=null)){
+        while ((!productExecutor.isTerminated()) || productQueue.size() > 0) {
+            while (((receiverDTO = productQueue.poll(3, TimeUnit.SECONDS)) != null)) {
                 receiver.submit(receiverDTO);
             }
         }
@@ -69,6 +70,8 @@ public class PixivStart implements Start {
     private String addHostName(String url) {
         if (url.startsWith("/")) {
             url = host + url;
+        }else if (!url.toUpperCase().startsWith("HTTP")){
+            url=host+"/"+url;
         }
         return url;
     }

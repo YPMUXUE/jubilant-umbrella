@@ -12,7 +12,7 @@ public class ReceiverImpl implements Receiver {
 
     @Override
     public void submit(InputStream inputStream) {
-
+        throw new UnsupportedOperationException();
     }
 
     @Override

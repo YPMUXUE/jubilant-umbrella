@@ -32,20 +32,18 @@ public class PixivProducerDirect implements Producter {
     @Override
     public void run() {
         try {
-            System.out.println("PixivProducerDirect:"+Thread.currentThread().getName()+":url:"+url);
             Document document=getDocument(parameter,url);
             Elements elements=document.select(selector);
             ReceiverDTO receiverDTO;
             for (Element element:elements){
                 String src=element.attr("data-src");
-                System.out.println("PixivProducerDirect:"+Thread.currentThread().getName()+":data-src:"+src);
                 receiverDTO=new ReceiverDTO();
                 Map<String,String> map=new HashMap<>(3);
                 map.put("referer",url);
                 receiverDTO.setRequestPropertyAdd(map);
                 receiverDTO.setFileName(src.substring(src.lastIndexOf("/img/")+5,src.length()).replace("/",""));
                 receiverDTO.setUrl(src);
-                productQueue.put(receiverDTO);
+               // productQueue.put(receiverDTO);
             }
         } catch (Exception e) {
             e.printStackTrace();
