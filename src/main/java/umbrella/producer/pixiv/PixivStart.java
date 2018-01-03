@@ -50,18 +50,20 @@ public class PixivStart implements Start {
                         Elements e;
                         if ((e=elements.select("a[class=work  _work multiple]")).size()>0){
                             pageQueueMultiple.put(e);
-                        }else if ((e=elements.select("a[class=work  _work]")).size()>0){
+                        }
+                        if ((e=elements.select("a[class=work  _work]")).size()>0){
                             pageQueueDirect.put(e);
                         }
                         page++;
                         //next page
-                        //TODO 好像只爬到了multiple
                         elements=getDocument(parameter,String.format(url, parameter.getUserid(), page))
                                 .select("li[class=image-item] .work");
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }finally {
+                    System.out.println(pageQueueDirect.size());
+                    System.out.println(pageQueueMultiple.size());
                 }
             }
         });

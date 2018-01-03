@@ -43,7 +43,7 @@ public class PixivProducerDirect implements Producter {
                 receiverDTO.setRequestPropertyAdd(map);
                 receiverDTO.setFileName(src.substring(src.lastIndexOf("/img/")+5,src.length()).replace("/",""));
                 receiverDTO.setUrl(src);
-               // productQueue.put(receiverDTO);
+                productQueue.put(receiverDTO);
             }
         } catch (Exception e) {
             e.printStackTrace();
