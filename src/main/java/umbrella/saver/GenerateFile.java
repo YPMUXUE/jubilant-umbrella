@@ -8,5 +8,7 @@ public interface GenerateFile {
 
     File generateNewFile(String filePath, String fileName, String suffix) throws IOException;
 
+    File generateNewFile(String filePath, String fileName) throws IOException;
+
     File generateNewFileWithRandomName(String filePath, String suffix) throws IOException;
 }

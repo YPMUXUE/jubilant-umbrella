@@ -54,6 +54,27 @@ public class GenerateFileImpl implements GenerateFile {
 
     }
 
+    public File generateNewFile(String filePath, String fileName) throws IOException {
+        if (!filePath.endsWith("\\")){
+            filePath=filePath+"\\";
+        }
+        String fileStr = filePath + fileName;
+        generatePath(fileStr);
+        File file = new File(fileStr);
+        if (file.exists()) {
+            do{
+                fileName=fileName+System.currentTimeMillis();
+                file=new File(filePath + fileName);
+            }while (file.exists());
+            file.createNewFile();
+            return file;
+        } else {
+            file.createNewFile();
+            return file;
+        }
+
+    }
+
     @Override
     public File generateNewFileWithRandomName(String filePath, String suffix) throws IOException {
         if (!suffix.startsWith(POINT)) {

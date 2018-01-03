@@ -30,6 +30,9 @@ public class ReadyToSave {
     public void save(InputStream inputStream,String fileName,String suffix) throws IOException {
         output.writeToFile(inputStream, generateFile.generateNewFile(SaverConfig.OUTPUT_PATH, fileName,suffix));
     }
+    public void save(InputStream inputStream,String fileName) throws IOException {
+        output.writeToFile(inputStream, generateFile.generateNewFile(SaverConfig.OUTPUT_PATH, fileName));
+    }
 
     public static void main(String[] args) throws Exception {
         Long start = System.currentTimeMillis();

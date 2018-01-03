@@ -27,12 +27,11 @@ public class GetStart {
 
     public static void main(String[] args)throws Exception{
         print();
-        args=new String[]{"490219","true"};
+//        args=new String[]{"490219","true"};
         ConfigReader configReader=new ConfigReader();
         configReader.initConfig(configPath);
-
         InputParameter parameter=readArgs(args);
-
+        ParameterFactory.setInputParameter(parameter);
         Start start=new PixivStart();
         start.start(parameter);
         Receiver receiver=new ReceiverImpl();

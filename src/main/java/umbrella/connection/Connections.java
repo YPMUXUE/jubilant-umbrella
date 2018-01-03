@@ -14,9 +14,13 @@ public class Connections {
 //        return getInputStream(url, false);
 //    }
 //
-//    public static InputStream getInputStream(String url) throws IOException {
-//        return getInputStream(url, false);
-//    }
+    public static URLConnection getConnection(URL url,boolean isProxy) throws IOException {
+        if (isProxy){
+            return url.openConnection(ProxyFactory.getProxy());
+        }else{
+            return url.openConnection();
+        }
+    }
 
     public static InputStream getInputStream(URL url, boolean isProxy) throws IOException {
         if (isProxy) {

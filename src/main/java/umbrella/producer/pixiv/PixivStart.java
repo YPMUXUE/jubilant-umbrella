@@ -12,14 +12,13 @@ import umbrella.task.ReceiverDTO;
 import umbrella.task.config.TaskConfig;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.util.concurrent.*;
 
 public class PixivStart implements Start {
     private static final String host = "https://www.pixiv.net";
     private static final String url = "https://www.pixiv.net/member_illust.php?id=%s&type=all&p=%d";
     private static final String sessionKey = "PHPSESSID";
-    private static final String selectorMultiple = "li[class=image-item]>a[class=work  _work multiple]";
-    private static final String selector = "li[class=image-item]>a[class=work  _work]";
     private ExecutorService productExecutor;
     private BlockingQueue<ReceiverDTO> productQueue;
 
@@ -123,15 +122,30 @@ public class PixivStart implements Start {
     }
 
     @Override
-    public void save(Receiver receiver) throws InterruptedException {
-        ReceiverDTO receiverDTO = null;
-        //productExecutor.isTerminated内所有线程返回时才会为true
-        //可以利用submit产生的future.isDone()
-        while ((!productExecutor.isTerminated()) || productQueue.size() > 0) {
-            while (((receiverDTO = productQueue.poll(3, TimeUnit.SECONDS)) != null)) {
-                receiver.submit(receiverDTO);
-            }
+    public void save(Receiver receiver) throws Exception {
+        ExecutorService commitExecutor=Executors.newFixedThreadPool(TaskConfig.THREAD_COUNT);
+        for (int i=0;i<TaskConfig.THREAD_COUNT;i++){
+            commitExecutor.submit(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        ReceiverDTO receiverDTO;
+                        //productExecutor.isTerminated内所有线程返回时才会为true
+                        //可以利用submit产生的future.isDone()
+                        while ((!productExecutor.isTerminated()) || productQueue.size() > 0) {
+                            while (((receiverDTO = productQueue.poll(3, TimeUnit.SECONDS)) != null)) {
+                                receiver.submit(receiverDTO);
+                            }
+                        }
+                    }catch (Exception e){
+                        e.printStackTrace();
+                    }finally{
+
+                    }
+                }
+            });
         }
+        commitExecutor.shutdown();
 
     }
 
